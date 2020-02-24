@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
+import About from "./components/about";
+import Login from "./components/users/Login";
+import Logout from "./components/users/Logout";
+import Home from "./components/home/index";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import { Provider } from 'react-redux';
+import store from './store'
+
+window.__MUI_USE_NEXT_TYPOGRAPHY_VARIANTS__ = true;
+
+class App extends Component {
+  render() {
+    return (
+      <Router>
+        <Provider store={store}>
+          <Switch>
+            <Route exact path="/" component={About} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/logout" component={Logout} />
+            <Route exact path="/home" component={Home} />
+
+          </Switch>
+        </Provider>
+      </Router>
+    );
+  }
 }
-
 export default App;
